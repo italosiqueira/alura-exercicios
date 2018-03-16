@@ -13,6 +13,6 @@ class DateHelper {
     }
     
     static dataParaTexto(dateObject) {
-        return `${dateObject.getFullYear()}-${dateObject.getMonth() + 1}-${dateObject.getDate()}`;
+        return `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
     }
 }
