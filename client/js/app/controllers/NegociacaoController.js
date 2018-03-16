@@ -19,7 +19,7 @@ class NegociacaoController {
 
     criaNegociacao(dataStr, quantidade, valor) {
         return new Negociacao(
-            new Date(...dataStr.split('-').map((item, index) => item - (index % 2)))
+            DateHelper.textoParaData(dataStr)
             , quantidade
             , valor);
     }
