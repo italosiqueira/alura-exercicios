@@ -1,10 +1,6 @@
-class NegociacoesView {
+class NegociacoesView extends View {
 
-    constructor(elemento) {
-        this._elemento = elemento;
-    }
-
-    _template(modelo) {
+    template(model) {
         return `
             <table class="table table-hover table-bordered">
                 <thead>
@@ -17,7 +13,7 @@ class NegociacoesView {
                 </thead>
                 
                 <tbody>
-                    ${modelo.negociacoes.map(item => `
+                    ${model.negociacoes.map(item => `
                         <tr>
                             <td>${DateHelper.dataParaTexto(item.data)}</td>
                             <td>${item.quantidade}</td>
@@ -30,15 +26,12 @@ class NegociacoesView {
                     <td colspan="3"></td>
                     <td>
                     ${
-                        modelo.negociacoes.reduce((totalVolume, item) => totalVolume + item.volume, 0)
+                        model.negociacoes.reduce((totalVolume, item) => totalVolume + item.volume, 0)
                     }
                     </td>
                 </tfoot>
             </table>
         `;
     }
-
-    update(modelo) {
-        this._elemento.innerHTML = this._template(modelo);
-    }
+    
 }
