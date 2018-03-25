@@ -1,7 +1,8 @@
 class ListaNegociacoes {
     
-    constructor() {
+    constructor(observador) {
         this._negociacoes = [];
+        this._observador = observador;
 
         Object.freeze(this);
     }
@@ -10,5 +11,12 @@ class ListaNegociacoes {
 
     adiciona(negociacao) {
         this._negociacoes.push(negociacao);
+
+    }
+
+    esvazia() {
+        while(this._negociacoes.length > 0) {
+            this._negociacoes.pop();
+        }
     }
 }
