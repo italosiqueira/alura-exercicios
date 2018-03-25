@@ -1,8 +1,8 @@
 class ListaNegociacoes {
     
-    constructor(observador) {
+    constructor(armadilha) {
         this._negociacoes = [];
-        this._observador = observador;
+        this._armadilha = armadilha;
 
         Object.freeze(this);
     }
@@ -11,7 +11,7 @@ class ListaNegociacoes {
 
     adiciona(negociacao) {
         this._negociacoes.push(negociacao);
-
+        this._armadilha(this);
     }
 
     esvazia() {
