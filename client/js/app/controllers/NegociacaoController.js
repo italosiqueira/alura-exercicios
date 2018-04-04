@@ -7,11 +7,11 @@ class NegociacaoController {
         this._inputValor = $('#valor');
 
         this._listaNegociacoes = new Bind(
-            new ListaNegociacoes(), new NegociacoesView($('#negociacoesView')), ['adiciona', 'esvazia']
+            new ListaNegociacoes(), new NegociacoesView($('#negociacoesView')), 'adiciona', 'esvazia'
         );
 
         this._mensagem = new Bind(
-            new Mensagem(), new MensagemView($('#mensagemView')), ['texto']
+            new Mensagem(), new MensagemView($('#mensagemView')), 'texto'
         );
         
     }
