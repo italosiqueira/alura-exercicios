@@ -10,7 +10,7 @@ class NegociacaoController {
         this._listaNegociacoes = new Proxy(
             new ListaNegociacoes(), {
                 get(target, prop, receiver) {
-                    if (prop == 'adiciona' && typeof (target[prop]) == typeof (Function)) {
+                    if (['adiciona', 'esvazia'].includes(prop) && typeof (target[prop]) == typeof (Function)) {
                         return function() {
                             console.log('Proxy property listener: ' + prop);
                             Reflect.apply(target[prop], target, arguments);
@@ -23,10 +23,23 @@ class NegociacaoController {
             });
 
         this._negociacoesView = new NegociacoesView($('#negociacoesView'));
-        this._mensagem = new Mensagem();
+        
+        this._mensagem = new Proxy(
+            new Mensagem(), {
+                set(target, prop, value, receiver) {
+                    console.log('Proxy property listener: ' + prop);
+                    if (['texto'].includes(prop)) {
+                        target[prop] = value;
+                        self._mensagemView.update(target);
+                    }
+
+                    return Reflect.set(target, prop, value, receiver);
+                }
+            });
+        
         this._mensagemView = new MensagemView($('#mensagemView'));
-        this._negociacoesView.update(this._listaNegociacoes);
-        this._mensagemView.update(this._mensagem);
+        
+        this._mensagem.texto = '';
     }
 
     adiciona(event) {
@@ -37,8 +50,6 @@ class NegociacaoController {
         this._limpaFormulario();
 
         this._mensagem.texto = 'Negociação cadastrada com sucesso!';
-
-        this._mensagemView.update(this._mensagem);
 
         console.log(this._listaNegociacoes.negociacoes);
     }
@@ -60,9 +71,6 @@ class NegociacaoController {
 
     apaga() {
         this._listaNegociacoes.esvazia();
-        this._negociacoesView.update(this._listaNegociacoes);
-
         this._mensagem.texto = 'Negociações apagadas com sucesso!';
-        this._mensagemView.update(this._mensagem);
     }
 }
