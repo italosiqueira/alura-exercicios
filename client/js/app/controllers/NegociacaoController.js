@@ -7,35 +7,15 @@ class NegociacaoController {
         this._inputValor = $('#valor');
 
         let self = this;
-        this._listaNegociacoes = new Proxy(
-            new ListaNegociacoes(), {
-                get(target, prop, receiver) {
-                    if (['adiciona', 'esvazia'].includes(prop) && typeof (target[prop]) == typeof (Function)) {
-                        return function() {
-                            console.log('Proxy property listener: ' + prop);
-                            Reflect.apply(target[prop], target, arguments);
-                            self._negociacoesView.update(target);
-                        }
-                    }
-                    
-                    return Reflect.get(target, prop, receiver);
-                }
-            });
+        this._listaNegociacoes = ProxyFactory.create(
+            new ListaNegociacoes(), ['adiciona', 'esvazia'], model => this._negociacoesView.update(model)
+        );
 
         this._negociacoesView = new NegociacoesView($('#negociacoesView'));
         
-        this._mensagem = new Proxy(
-            new Mensagem(), {
-                set(target, prop, value, receiver) {
-                    console.log('Proxy property listener: ' + prop);
-                    if (['texto'].includes(prop)) {
-                        target[prop] = value;
-                        self._mensagemView.update(target);
-                    }
-
-                    return Reflect.set(target, prop, value, receiver);
-                }
-            });
+        this._mensagem = ProxyFactory.create(
+            new Mensagem(), ['texto'], model => this._mensagemView.update(model)
+        );
         
         this._mensagemView = new MensagemView($('#mensagemView'));
         
