@@ -13,7 +13,7 @@ class NegociacaoController {
         this._mensagem = new Bind(
             new Mensagem(), new MensagemView($('#mensagemView')), 'texto'
         );
-        
+
     }
 
     adiciona(event) {
@@ -26,6 +26,37 @@ class NegociacaoController {
         this._mensagem.texto = 'Negociação cadastrada com sucesso!';
 
         console.log(this._listaNegociacoes.negociacoes);
+    }
+
+    importaNegociacoes() {
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open("GET", 'negociacoes/semana');
+
+        xhr.onreadystatechange = () => {
+            /*
+            0: requisição não iniciada
+            1: conexão com o servidor estabelecida
+            2: rqeuisição recebida
+            3: processando requisição
+            4: requisição concluída e a resposta está pronta
+            */
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    JSON.parse(xhr.responseText)
+                        .map(item => new Negociacao(new Date(item.data), item.quantidade, item.valor))
+                        .forEach(element =>
+                            this._listaNegociacoes.adiciona(element)
+                        );
+                    console.log('Negociações importadas com sucesso!');
+                } else {
+                    console.log('Não foi possível se conectar ao servidor: ' + console.log(xhr.responseText));
+                }
+            }
+        }
+
+        xhr.send();
     }
 
     _criaNegociacao() {
