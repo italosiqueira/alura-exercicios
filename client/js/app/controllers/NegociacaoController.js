@@ -7,12 +7,14 @@ class NegociacaoController {
         this._inputValor = $('#valor');
 
         this._listaNegociacoes = new Bind(
-            new ListaNegociacoes(), new NegociacoesView($('#negociacoesView')), 'adiciona', 'esvazia'
+            new ListaNegociacoes(), new NegociacoesView($('#negociacoesView')), 'adiciona', 'esvazia', 'ordena', 'inverteOrdem'
         );
 
         this._mensagem = new Bind(
             new Mensagem(), new MensagemView($('#mensagemView')), 'texto'
         );
+
+        this._colunaAtual = "";
 
     }
 
@@ -35,11 +37,25 @@ class NegociacaoController {
         service.obterNegociacoes()
             .then(
                 negociacoes => {
-                    negociacoes.reduce((flatArray, array) => flatArray.concat(array), []).forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                    negociacoes
+                        .reduce((flatArray, array) => flatArray.concat(array), [])
+                        .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
                     this._mensagem.texto = 'Negociações importadas com sucesso!';
                 }
             )
-            .catch(error => this._mensagem.texto = error);   
+            .catch(error => this._mensagem.texto = error);
+    }
+
+    ordena(coluna) {
+
+        // Nome da coluna deve ser igual ao nome da propriedade no modelo (MUITO ACOPLADO!)
+        if (this._colunaAtual == coluna)
+            this._listaNegociacoes.inverteOrdem();
+        else
+            this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+            
+        
+        this._colunaAtual = coluna;
     }
 
     _criaNegociacao() {
