@@ -29,11 +29,15 @@
         <button class="btn btn-primary" type="submit" onclick="sendPost(event)">Enviar dados para servidor</button>
     </form>
 
+    <script src="js/app/services/HttpService.js"></script>
+
     <script>
 
         function sendPost(event) {
 
             event.preventDefault();
+            
+            let service = new HttpService();
             let $ = document.querySelector.bind(document);
 
             console.log("Enviando post");
@@ -47,24 +51,20 @@
                 "quantidade": $('#quantidade').value,
                 "valor": $('#valor').value
             };
-            let params = JSON.stringify(body);
 
-            console.log(params);
-            
-            xhr.open("POST", '/negociacoes');
-            xhr.setRequestHeader("Content-type", 'application/json');
-            
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        console.log("POST Success: " + xhr.responseText);
-                    } else {
-                        console.log("POST failed: " + xhr.responseText);
+            service.post('/negociacoes', body)
+                .then(
+                    () => {
+                        $('#data').value = '';
+                        $('#quantidade').value = 1;
+                        $('#valor').value = 0.0;
+                        $('#data').focus();
+                        alert("Negociação enviada com sucesso!");
                     }
-                }
-            };
-            
-            xhr.send(params);
+                )
+                .catch(
+                    error => alert(`Um erro ocorreu durante a requisição: ${error}`)
+                );
         }
     </script>
 </body>
