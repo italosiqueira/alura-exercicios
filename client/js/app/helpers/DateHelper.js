@@ -5,8 +5,8 @@ class DateHelper {
     }
 
     static textoParaData(dateString) {
-        if(/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
-            return new Date(...dateString.split('-').map((item, index) => item - (index % 2)));
+        if(/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) {
+            return new Date(...dateString.split('/').map((item, index) => item - (index % 2)));
         } else {
             throw new Error("Not a valid Date String format!");
         }
