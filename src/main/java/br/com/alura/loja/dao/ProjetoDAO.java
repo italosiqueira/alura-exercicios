@@ -10,11 +10,11 @@ public class ProjetoDAO {
 	
 	private static Map<Long, Projeto> banco = new HashMap<Long, Projeto>();
 	
-	private static AtomicLong contador = new AtomicLong(1);
+	private static AtomicLong contador = new AtomicLong(0);
 	
 	static {
-		banco.put(1L, new Projeto(1L, "Minha loja", 2014));
-		banco.put(2L, new Projeto(2L, "Alura", 2012));
+		banco.put(1L, new Projeto(contador.incrementAndGet(), "Minha loja", 2014));
+		banco.put(2L, new Projeto(contador.incrementAndGet(), "Alura", 2012));
 	}
 	
 	public void adiciona(Projeto projeto) {
