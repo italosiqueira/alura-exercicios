@@ -78,6 +78,15 @@ public class ClienteTest {
 		
 		Response response = target.path("/carrinhos").request().post(entity );
 		
-		assertEquals("<status>sucesso</status>", response.readEntity(String.class));
+		assertEquals(201, response.getStatus());
+		
+		String location = response.getHeaderString("Location");
+		
+		System.out.println(location);
+		
+		String conteudo = client.target(location).request().get(String.class);
+		
+		assertTrue(conteudo.contains("XBox"));
+		
 	}
 }
