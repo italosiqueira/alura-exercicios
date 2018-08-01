@@ -26,10 +26,14 @@ import br.com.alura.loja.modelo.Projeto;
 public class ClienteTest {
 	
 	private HttpServer servidor;
+	private Client client;
+	private WebTarget target;
 
 	@Before
 	public void inicializarServidor() throws URISyntaxException {
 		this.servidor = Servidor.startaServidor();
+		client = ClientBuilder.newClient();
+		target = client.target("http://localhost:8080");
 	}
 	
 	@After
@@ -39,53 +43,34 @@ public class ClienteTest {
 	
 	@Test
 	public void testaQueBuscarUmCarrinhoTrazOCarrinhoEsperado() {
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080");
-		
 		String conteudo = target.path("/carrinhos/1").request().get(String.class);
-		
 		Carrinho carrinho = (Carrinho) new XStream().fromXML(conteudo);
-		
 		System.out.println(carrinho.getRua());
-		
 		assertTrue(carrinho.getRua().contains("Rua Vergueiro 3185"));
 	}
 	
 	@Test
 	public void testaQueBuscarUmProjetoTrazOProjetoEsperado() {
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080");
-		
 		String conteudo = target.path("/projetos/1").request().get(String.class);
-		
 		Projeto projeto = (Projeto) new XStream().fromXML(conteudo);
-		
 		System.out.println(projeto.getNome());
-		
 		assertEquals("Minha loja", projeto.getNome());
 	}
 	
 	@Test
 	public void testaQueGravarUmCarrinhoRetornaSucesso() {
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080");
 		
 		Carrinho carrinho = new Carrinho();
 		carrinho.adiciona(new Produto(314L, "XBox One S", 1499.00, 1));
 		String xml = carrinho.toXML();
 		
 		Entity<String> entity = Entity.entity(xml, MediaType.APPLICATION_XML);
-		
 		Response response = target.path("/carrinhos").request().post(entity );
-		
 		assertEquals(201, response.getStatus());
 		
 		String location = response.getHeaderString("Location");
-		
 		System.out.println(location);
-		
 		String conteudo = client.target(location).request().get(String.class);
-		
 		assertTrue(conteudo.contains("XBox"));
 		
 	}
