@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.jayway.restassured.path.json.JsonPath;
@@ -14,26 +15,35 @@ import br.com.caelum.leilao.modelo.Usuario;
 
 public class UsuarioWSTest {
 	
+	private static Usuario usuarioAniche;
+	private static Usuario usuarioSilveira;
+
+	@BeforeClass
+	public static void init() {
+		usuarioAniche = new Usuario(1L, "Mauricio Aniche", "mauricio.aniche@caelum.com.br");
+		usuarioSilveira = new Usuario(2L, "Guilherme Silveira", "guilherme.silveira@caelum.com.br");		
+	}
+	
 	@Test
 	public void deveRetornarListaDeUsuarios() {
 		XmlPath path = given().header("Accept", "application/xml").get("/usuarios").andReturn().xmlPath();
 		
 		List<Usuario> usuarios = path.getList("list.usuario", Usuario.class);
 		
-		Usuario esperado1 = new Usuario(1L, "Mauricio Aniche", "mauricio.aniche@caelum.com.br");
-		Usuario esperado2 = new Usuario(2L, "Guilherme Silveira", "guilherme.silveira@caelum.com.br");
-		
-		assertEquals(esperado1, usuarios.get(0));
-		assertEquals(esperado2, usuarios.get(1));
+		assertEquals(usuarioAniche, usuarios.get(0));
+		assertEquals(usuarioSilveira, usuarios.get(1));
 	}
 	
 	@Test
 	public void deveRetornarUsuarioPeloId() {
-		JsonPath path = given().header("Accept", "application/json").get("/usuarios/show?usuario.id=1").andReturn().jsonPath();
+		JsonPath path = 
+				given()
+				.header("Accept", "application/json")
+				.parameter("usuario.id", 1)
+				.get("/usuarios/show")
+				.andReturn().jsonPath();
 		
-		Usuario esperado1 = new Usuario(1L, "Mauricio Aniche", "mauricio.aniche@caelum.com.br");
-		
-		assertEquals(esperado1, path.getObject("usuario", Usuario.class));
+		assertEquals(usuarioAniche, path.getObject("usuario", Usuario.class));
 	}
 
 }
