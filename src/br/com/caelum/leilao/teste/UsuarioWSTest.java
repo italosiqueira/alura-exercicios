@@ -1,6 +1,6 @@
 package br.com.caelum.leilao.teste;
 
-import static com.jayway.restassured.RestAssured.get;
+import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class UsuarioWSTest {
 	
 	@Test
 	public void deveRetornarListaDeUsuarios() {
-		XmlPath path = get("/usuarios?_format=xml").andReturn().xmlPath();
+		XmlPath path = given().header("Accept", "application/xml").get("/usuarios").andReturn().xmlPath();
 		
 		Usuario usuario1 = path.getObject("list.usuario[0]", Usuario.class);
 		Usuario usuario2 = path.getObject("list.usuario[1]", Usuario.class);
