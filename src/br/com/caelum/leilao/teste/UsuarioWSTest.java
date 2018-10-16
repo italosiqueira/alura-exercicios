@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.jayway.restassured.path.json.JsonPath;
@@ -18,10 +18,16 @@ public class UsuarioWSTest {
 	private static Usuario usuarioAniche;
 	private static Usuario usuarioSilveira;
 
-	@BeforeClass
+	@Before
 	public static void init() {
 		usuarioAniche = new Usuario(1L, "Mauricio Aniche", "mauricio.aniche@caelum.com.br");
-		usuarioSilveira = new Usuario(2L, "Guilherme Silveira", "guilherme.silveira@caelum.com.br");		
+		usuarioSilveira = new Usuario(2L, "Guilherme Silveira", "guilherme.silveira@caelum.com.br");
+		
+		// Exemplo de configuração da biblioteca
+		/*
+		 * RestAssured.baseURI = "http://www.meuendereco.com.br";
+		 * RestAssured.port = 80;
+		 */
 	}
 	
 	@Test
