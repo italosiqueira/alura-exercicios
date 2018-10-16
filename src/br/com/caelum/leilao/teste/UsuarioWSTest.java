@@ -45,5 +45,25 @@ public class UsuarioWSTest {
 		
 		assertEquals(usuarioAniche, path.getObject("usuario", Usuario.class));
 	}
+	
+	@Test
+	public void deveAdicionarUsuario() {
+		Usuario usuario = new Usuario("Italo Siqueira Lima", "italo.lima@siqueira.com.br");
+		XmlPath path = 
+					given()
+						.header("Accept", "application/xml")
+						.contentType("application/xml")
+						// Objeto serializado de acordo com o formato indicado em "Content-Type" (cortesia do REST-Assured)
+						.body(usuario)
+					.when()
+						.post("/usuarios")
+					.andReturn()
+						.xmlPath();
+		
+		Usuario resposta = path.getObject("usuario", Usuario.class);
+		
+		assertEquals("Italo Siqueira Lima", resposta.getNome());
+		assertEquals("italo.lima@siqueira.com.br", resposta.getEmail());
+	}
 
 }
