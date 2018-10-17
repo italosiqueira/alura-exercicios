@@ -78,16 +78,19 @@ public class UsuarioWSTest {
 	@Test
 	public void deveRemoverUsuarioPeloId() {
 		
-		given()
-			.header("Accept", "application/xml")
+		Usuario usuario = new Usuario(5259902589853518587L, "Italo Siqueira Lima", "italo.lima@siqueira.com.br");
+		
+		String resposta = given()
 			.contentType("application/xml")
-			.body(usuarioAniche)
+			.body(usuario)
 		.expect()
 			.statusCode(200)
 		.when()
 			.delete("/usuarios/deleta")
 		.andReturn()
 			.asString();
+		
+		System.out.println(resposta);
 	}
 
 }

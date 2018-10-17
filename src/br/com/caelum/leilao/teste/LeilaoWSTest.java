@@ -50,5 +50,39 @@ public class LeilaoWSTest {
 		assertEquals(totalEsperado, total);
 		
 	}
+	
+	@Test
+	public void deveAdicionarUmLeilao() {
+		Leilao leilao = 
+				new Leilao(3L, "Dell Inspiron", 2500.00
+						, new Usuario(2L, "Guilherme Silveira", "guilherme.silveira@caelum.com.br")
+						, false);
+		
+		XmlPath path = given()
+			.header("Accept", "application/xml")
+			.contentType("application/xml")
+			.body(leilao)
+		.expect()
+			.statusCode(200)
+		.when()
+			.post("/leiloes")
+		.andReturn()
+			.xmlPath();
+		
+		Leilao resposta = path.getObject("leilao", Leilao.class);
+		
+		assertEquals("Dell Inspiron", resposta.getNome());
+		
+		given()
+			.contentType("application/xml")
+			.body(leilao)
+		.expect()
+			.statusCode(200)
+		.when()
+			.delete("/leiloes/deletar")
+		.andReturn()
+			.asString();
+		
+	}
 
 }
