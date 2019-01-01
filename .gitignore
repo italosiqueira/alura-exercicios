@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #Mac OS X specific files
 .DS_Store
 
@@ -24,3 +25,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+=======
+leiloes.db*
+lib/
+tmp/
+target/
+src/main/webapp/WEB-INF/lib
+src/main/webapp/WEB-INF/classes
+
+>>>>>>> temp/master
