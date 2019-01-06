@@ -1,8 +1,8 @@
 package br.com.caelum.gerenciador.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,18 +30,9 @@ public class NovaEmpresaServlet extends HttpServlet {
 		
 		banco.adiciona(empresa);
 		
-		PrintWriter out = response.getWriter();
-		
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<meta charset=\"ISO-8859-1\">");
-		out.println("<title>Nova Empresa - Curso Servlet Parte 1: Fundamentos da programação web Java</title>");
-		out.println("</head>");
-		out.println("<body>");		
-		out.println("<p>Empresa " + nome + " cadastrada com sucesso!</p>");
-		out.println("</body>");
-		out.println("</html>");
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresa.jsp");
+		request.setAttribute("nomeEmpresa", nome);
+		rd.forward(request, response);
 		
 	}
 
