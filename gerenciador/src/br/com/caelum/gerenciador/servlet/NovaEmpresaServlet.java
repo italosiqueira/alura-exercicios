@@ -23,13 +23,20 @@ public class NovaEmpresaServlet extends HttpServlet {
 		
 		String nome = request.getParameter("nome");
 		
+		Banco banco = new Banco();
+		
+		Empresa empresa = new Empresa();
+		empresa.setNome(nome);
+		
+		banco.adiciona(empresa);
+		
 		PrintWriter out = response.getWriter();
 		
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<meta charset=\"ISO-8859-1\">");
-		out.println("<title>Oi - Curso Servlet Parte 1: Fundamentos da programação web Java</title>");
+		out.println("<title>Nova Empresa - Curso Servlet Parte 1: Fundamentos da programação web Java</title>");
 		out.println("</head>");
 		out.println("<body>");		
 		out.println("<p>Empresa " + nome + " cadastrada com sucesso!</p>");
