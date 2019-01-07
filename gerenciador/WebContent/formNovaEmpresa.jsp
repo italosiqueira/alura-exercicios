@@ -5,16 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nova Empresa - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
+<title>Formulário Nova Empresa - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
 </head>
 <body>
+<c:url value="/novaEmpresa" var="linkServletNovaEmpresa"/>
 
-<c:if test="${not empty nomeEmpresa }">
-	<p>Empresa ${nomeEmpresa} cadastrada com sucesso!</p>
-</c:if>
-
-<c:if test="${empty nomeEmpresa }">
-	<p>Nenhuma empresa cadastrada!</p>
-</c:if>
+<form action="${linkServletNovaEmpresa}" method="POST">
+    Nome: <input type="text" name="nome">
+    <input type="submit">
+</form>
 </body>
 </html>
