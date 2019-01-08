@@ -11,7 +11,8 @@
 <c:url value="/novaEmpresa" var="linkServletNovaEmpresa"/>
 
 <form action="${linkServletNovaEmpresa}" method="POST">
-    Nome: <input type="text" name="nome">
+    Nome: <input type="text" name="nome"><br>
+    Data de Abertura: <input type="text" name="data"><br> 
     <input type="submit">
 </form>
 </body>
