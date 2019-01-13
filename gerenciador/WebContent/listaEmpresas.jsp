@@ -10,6 +10,12 @@
 <title>Consulta empresas - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
 </head>
 <body>
+<c:if test="${not empty nomeEmpresa }">
+	<p>Empresa ${nomeEmpresa} cadastrada com sucesso!</p>
+</c:if>
+
+<br/>
+
 <ul>
 <c:forEach items="${empresas}" var="empresa">
 	<li>${empresa.nome} - <f:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy"/> </li>
