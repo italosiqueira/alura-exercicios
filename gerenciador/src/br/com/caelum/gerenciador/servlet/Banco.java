@@ -7,9 +7,11 @@ public class Banco {
 	
 	private static List<Empresa> empresas = new ArrayList<Empresa>();
 	
+	private static Integer chaveSequencial = 1;
+	
 	static {
-		Banco.empresas.add(new Empresa(1, "Alura"));
-		Banco.empresas.add(new Empresa(2, "Caelum"));
+		Banco.empresas.add(new Empresa(chaveSequencial++, "Alura"));
+		Banco.empresas.add(new Empresa(chaveSequencial++, "Caelum"));
 		
 	}
 	
