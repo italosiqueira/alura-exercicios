@@ -1,6 +1,7 @@
 package br.com.caelum.gerenciador.servlet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Banco {
@@ -21,6 +22,20 @@ public class Banco {
 	
 	public List<Empresa> getEmpresas() {
 		return new ArrayList<>(Banco.empresas);
+	}
+
+	public void removeEmpresa(Integer id) {
+		// Deve-se utilizar um iterador para praticar a exclusão à medida que 
+		// se itera sobre a coleção
+		Iterator<Empresa> it = empresas.iterator();
+		while (it.hasNext()) {
+			Empresa empresa = (Empresa) it.next();
+			
+			if (empresa.getId() == id) {
+				it.remove();
+				break;
+			}
+		}
 	}
 
 }

@@ -21,9 +21,11 @@ public class RemoveEmpresaServlet extends HttpServlet {
 		
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		
-		System.out.println("Parametro ID: " + id);
+		Banco banco = new Banco();
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		banco.removeEmpresa(id);
+		
+		response.sendRedirect("listaEmpresas");
 	}
 
 }
