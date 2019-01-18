@@ -11,6 +11,7 @@
 </head>
 <body>
 <c:url value="/removeEmpresa" var="linkServletRemoveEmpresa"/>
+<c:url value="/mostraEmpresa" var="linkServletMostraEmpresa"/>
 
 <c:if test="${not empty nomeEmpresa }">
 	<p>Empresa ${nomeEmpresa} cadastrada com sucesso!</p>
@@ -19,6 +20,7 @@
 <ul>
 <c:forEach items="${empresas}" var="empresa">
 	<li>${empresa.nome} - <f:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy"/> 
+	<a href="${linkServletMostraEmpresa}?id=${empresa.id}">Altera</a>
 	<a href="${linkServletRemoveEmpresa}?id=${empresa.id}">Remove</a>
 	</li>
 </c:forEach>
