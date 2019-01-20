@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.caelum.gerenciador.modelo.Banco;
+import br.com.caelum.gerenciador.modelo.Empresa;
+
 /**
  * Servlet implementation class NovaEmpresaServlet
  */
