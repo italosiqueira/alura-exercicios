@@ -50,7 +50,7 @@ public class NovaEmpresaServlet extends HttpServlet {
 		
 		request.setAttribute("nomeEmpresa", nome);
 		
-		response.sendRedirect("listaEmpresas");
+		response.sendRedirect("entrada?acao=listaEmpresas");
 //		
 //		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
 //		request.setAttribute("nomeEmpresa", nome);

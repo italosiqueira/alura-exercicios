@@ -43,7 +43,7 @@ public class AlteraEmpresaServlet extends HttpServlet {
 		empresa.setNome(nome);
 		empresa.setDataAbertura(dataAbertura);
 		
-		response.sendRedirect("listaEmpresas");
+		response.sendRedirect("entrada?acao=listaEmpresas");
 		
 	}
 
