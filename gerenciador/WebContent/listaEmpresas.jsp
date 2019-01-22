@@ -10,8 +10,8 @@
 <title>Consulta empresas - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
 </head>
 <body>
-<c:url value="/removeEmpresa" var="linkServletRemoveEmpresa"/>
-<c:url value="/mostraEmpresa" var="linkServletMostraEmpresa"/>
+
+<c:url value="/entrada" var="linkServletEntrada"/>
 
 <c:if test="${not empty nomeEmpresa }">
 	<p>Empresa ${nomeEmpresa} cadastrada com sucesso!</p>
@@ -20,8 +20,8 @@
 <ul>
 <c:forEach items="${empresas}" var="empresa">
 	<li>${empresa.nome} - <f:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy"/> 
-	<a href="${linkServletMostraEmpresa}?id=${empresa.id}">Altera</a>
-	<a href="${linkServletRemoveEmpresa}?id=${empresa.id}">Remove</a>
+	<a href="${linkServletEntrada}?acao=mostraEmpresa&id=${empresa.id}">Altera</a>
+	<a href="${linkServletEntrada}?acao=removeEmpresa&id=${empresa.id}">Remove</a>
 	</li>
 </c:forEach>
 </ul>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.gerenciador.acao.ListaEmpresas;
+import br.com.caelum.gerenciador.acao.MostraEmpresa;
 
 /**
  * Servlet implementation class UnicaEntradaServlet
@@ -23,17 +24,14 @@ public class UnicaEntradaServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String paramAcao = request.getParameter("acao");
 		
-		switch (paramAcao) {
-		case "listaEmpresas":
-			
+		if (paramAcao.equals("listaEmpresas")) {
 			ListaEmpresas acao = new ListaEmpresas();
-			acao.executa(request, response);
-			
-			break;
-		default:
-			// TODO Criar uma página para status 404.
-			break;
+			acao.executa(request, response);			
+		} else if (paramAcao.equals("mostraEmpresa")) {
+			MostraEmpresa acao = new MostraEmpresa();
+			acao.executa(request, response);			
 		}
+		
 	}
 
 }
