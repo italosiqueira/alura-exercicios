@@ -9,8 +9,9 @@
 <title>Formulário Editar Empresa - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
 </head>
 <body>
-<c:url value="/entrada?acao=alteraEmpresa&id=${empresa.id}" var="linkServletAlteraEmpresa"/>
-<form action="${linkServletAlteraEmpresa}" method="post">
+<c:url value="/entrada" var="linkServletEntrada"/>
+<form action="${linkServletEntrada}" method="post">
+<input type="hidden" name="acao" value="alteraEmpresa">
 <input type="hidden" name="id" value="${empresa.id}">
 Nome: <input type="text" name="nome" value="${empresa.nome}">
 Data Abertura: <input type="text" name="dataAbertura" value="<f:formatDate value="${empresa.dataAbertura}" pattern="dd/MM/yyyy" type="date"/>">

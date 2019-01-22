@@ -8,9 +8,9 @@
 <title>Formulário Nova Empresa - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
 </head>
 <body>
-<c:url value="/entrada?acao=novaEmpresa" var="linkServletNovaEmpresa"/>
-
-<form action="${linkServletNovaEmpresa}" method="POST">
+<c:url value="/entrada" var="linkServletEntrada"/>
+<form action="${linkServletEntrada}" method="POST">
+	<input type="hidden" name="acao" value="novaEmpresa">
     Nome: <input type="text" name="nome"><br>
     Data de Abertura: <input type="text" name="data"><br> 
     <input type="submit" value="Criar">
