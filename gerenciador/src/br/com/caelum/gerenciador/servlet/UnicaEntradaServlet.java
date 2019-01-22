@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.caelum.gerenciador.acao.AlteraEmpresa;
 import br.com.caelum.gerenciador.acao.ListaEmpresas;
 import br.com.caelum.gerenciador.acao.MostraEmpresa;
+import br.com.caelum.gerenciador.acao.NovaEmpresa;
 import br.com.caelum.gerenciador.acao.RemoveEmpresa;
 
 /**
@@ -37,6 +38,9 @@ public class UnicaEntradaServlet extends HttpServlet {
 			acao.executa(request, response);
 		} else if (paramAcao.equals("removeEmpresa")) {
 			RemoveEmpresa acao = new RemoveEmpresa();
+			acao.executa(request, response);
+		} else if (paramAcao.equals("novaEmpresa")) {
+			NovaEmpresa acao = new NovaEmpresa();
 			acao.executa(request, response);
 		}
 		
