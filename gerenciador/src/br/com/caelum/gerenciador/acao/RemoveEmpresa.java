@@ -10,7 +10,7 @@ import br.com.caelum.gerenciador.modelo.Banco;
 
 public class RemoveEmpresa {
 	
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Requested unified entry-point removeEmpresa...");
 		
@@ -19,7 +19,7 @@ public class RemoveEmpresa {
 		Banco banco = new Banco();
 		banco.removeEmpresa(id);
 		
-		response.sendRedirect("entrada?acao=listaEmpresas");
+		return "redirect:entrada?acao=listaEmpresas";
 	}
 
 }

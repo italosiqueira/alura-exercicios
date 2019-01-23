@@ -14,7 +14,7 @@ import br.com.caelum.gerenciador.modelo.Empresa;
 
 public class AlteraEmpresa {
 	
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Requested unified entry-point alteraEmpresa...");
 		
@@ -35,7 +35,8 @@ public class AlteraEmpresa {
 		empresa.setNome(nome);
 		empresa.setDataAbertura(dataAbertura);
 		
-		response.sendRedirect("entrada?acao=listaEmpresas");
+		return "redirect:entrada?acao=listaEmpresas";
+		
 	}
 
 }
