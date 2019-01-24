@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.caelum.gerenciador.modelo.Banco;
 import br.com.caelum.gerenciador.modelo.Empresa;
 
-public class ListaEmpresas {
+public class ListaEmpresas implements IAcao {
 	
+	/* (non-Javadoc)
+	 * @see br.com.caelum.gerenciador.acao.IAcao#executa(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Requested unified entry-point listaEmpresa...");
 		

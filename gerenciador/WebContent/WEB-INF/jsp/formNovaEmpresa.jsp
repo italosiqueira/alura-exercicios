@@ -10,7 +10,7 @@
 <body>
 <c:url value="/entrada" var="linkServletEntrada"/>
 <form action="${linkServletEntrada}" method="POST">
-	<input type="hidden" name="acao" value="novaEmpresa">
+	<input type="hidden" name="acao" value="NovaEmpresa">
     Nome: <input type="text" name="nome"><br>
     Data de Abertura: <input type="text" name="data"><br> 
     <input type="submit" value="Criar">

@@ -9,12 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.caelum.gerenciador.acao.AlteraEmpresa;
-import br.com.caelum.gerenciador.acao.ListaEmpresas;
-import br.com.caelum.gerenciador.acao.MostraEmpresa;
-import br.com.caelum.gerenciador.acao.NovaEmpresa;
-import br.com.caelum.gerenciador.acao.NovaEmpresaForm;
-import br.com.caelum.gerenciador.acao.RemoveEmpresa;
+import br.com.caelum.gerenciador.acao.IAcao;
 
 /**
  * Servlet implementation class UnicaEntradaServlet
@@ -30,25 +25,19 @@ public class UnicaEntradaServlet extends HttpServlet {
 		String paramAcao = request.getParameter("acao");
 		String nome = null;
 		
+		String nomeDaClasse = "br.com.caelum.gerenciador.acao." + paramAcao;
 		
-		if (paramAcao.equals("listaEmpresas")) {
-			ListaEmpresas acao = new ListaEmpresas();
+		/*
+		 * O mecanismo de instanciação das classes de ações agora está mais 
+		 * genérico e deve seguir algumas convenções a fim de evitar alterar 
+		 * o servlet a cada nova ação criada.
+		 */
+		try {
+			Class classe = Class.forName(nomeDaClasse);
+			IAcao acao = (IAcao) classe.newInstance();
 			nome = acao.executa(request, response);			
-		} else if (paramAcao.equals("mostraEmpresa")) {
-			MostraEmpresa acao = new MostraEmpresa();
-			nome = acao.executa(request, response);			
-		} else if (paramAcao.equals("alteraEmpresa")) {
-			AlteraEmpresa acao = new AlteraEmpresa();
-			nome = acao.executa(request, response);
-		} else if (paramAcao.equals("removeEmpresa")) {
-			RemoveEmpresa acao = new RemoveEmpresa();
-			nome = acao.executa(request, response);
-		} else if (paramAcao.equals("novaEmpresa")) {
-			NovaEmpresa acao = new NovaEmpresa();
-			nome = acao.executa(request, response);
-		} else if (paramAcao.equals("novaEmpresaForm")) {
-			NovaEmpresaForm acao = new NovaEmpresaForm();
-			nome = acao.executa(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			throw new ServletException(e);
 		}
 		
 		String link[] = nome.split(":");

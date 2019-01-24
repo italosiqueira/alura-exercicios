@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.caelum.gerenciador.modelo.Banco;
 import br.com.caelum.gerenciador.modelo.Empresa;
 
-public class AlteraEmpresa {
+public class AlteraEmpresa implements IAcao {
 	
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -35,7 +35,7 @@ public class AlteraEmpresa {
 		empresa.setNome(nome);
 		empresa.setDataAbertura(dataAbertura);
 		
-		return "redirect:entrada?acao=listaEmpresas";
+		return "redirect:entrada?acao=ListaEmpresas";
 		
 	}
 
