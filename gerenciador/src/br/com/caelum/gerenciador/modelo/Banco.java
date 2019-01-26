@@ -8,12 +8,16 @@ public class Banco {
 	
 	private static List<Empresa> empresas = new ArrayList<Empresa>();
 	
+	private static List<Usuario> usuarios = new ArrayList<Usuario>();
+	
 	private static Integer chaveSequencial = 1;
 	
 	static {
 		Banco.empresas.add(new Empresa(chaveSequencial++, "Alura"));
 		Banco.empresas.add(new Empresa(chaveSequencial++, "Caelum"));
 		
+		Banco.usuarios.add(new Usuario("italo", "334529"));
+		Banco.usuarios.add(new Usuario("fauzuda", "5247"));
 	}
 	
 	public void adiciona(Empresa empresa) {
@@ -47,6 +51,16 @@ public class Banco {
 		}
 		
 		return null;
+	}
+	
+	public Usuario existeUsuario(String login, String senha) {
+		
+		for(Usuario usuario : usuarios) {
+	        if(usuario.ehIgual(login, senha)) {
+	            return usuario;
+	        }
+	    }
+	    return null;
 	}
 
 }
