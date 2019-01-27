@@ -10,12 +10,18 @@
 <title>Consulta empresas - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
 </head>
 <body>
+<c:import url="logout-parcial.jsp" />
 
 <c:url value="/entrada" var="linkServletEntrada"/>
+
+<c:if test="${not empty usuarioLogado}">
+	<p>Usuário ${usuarioLogado.login}</p>
+</c:if>
 
 <c:if test="${not empty nomeEmpresa }">
 	<p>Empresa ${nomeEmpresa} cadastrada com sucesso!</p>
 </c:if>
+
 <p>Lista de empresas:</p>
 <ul>
 <c:forEach items="${empresas}" var="empresa">

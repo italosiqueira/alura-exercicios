@@ -22,10 +22,18 @@ public class UnicaEntradaServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String paramAcao = request.getParameter("acao");
 		String nome = null;
-		
+		String paramAcao = request.getParameter("acao");
 		String nomeDaClasse = "br.com.caelum.gerenciador.acao." + paramAcao;
+		
+		boolean ehAcaoProtegida = !("LoginForm".equals(paramAcao) || "Login".equals(paramAcao));
+		
+		boolean usuarioNaoEstaLogado = request.getSession().getAttribute("usuarioLogado") == null;
+		
+		if (usuarioNaoEstaLogado && ehAcaoProtegida) {
+			response.sendRedirect("entrada?acao=LoginForm");
+			return;
+		}
 		
 		/*
 		 * O mecanismo de instanciação das classes de ações agora está mais 

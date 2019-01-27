@@ -21,8 +21,13 @@ public class Login implements IAcao {
 		Banco banco = new Banco();
 
 		Usuario usuario = banco.existeUsuario(login, senha);
-
-		return usuario == null ? "redirect:entrada?acao=LoginForm" : "redirect:entrada?acao=ListaEmpresas";
+		
+		if (usuario != null) {
+			request.getSession().setAttribute("usuarioLogado", usuario);;
+			return "redirect:entrada?acao=ListaEmpresas";
+		} else {
+			return "redirect:entrada?acao=LoginForm";
+		}
 	}
 
 }

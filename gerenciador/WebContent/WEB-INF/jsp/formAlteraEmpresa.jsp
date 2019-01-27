@@ -9,6 +9,7 @@
 <title>Formulário Editar Empresa - Curso Servlet Parte 1: Fundamentos da programação web Java</title>
 </head>
 <body>
+<c:import url="logout-parcial.jsp" />
 <c:url value="/entrada" var="linkServletEntrada"/>
 <form action="${linkServletEntrada}" method="post">
 <input type="hidden" name="acao" value="AlteraEmpresa">
