@@ -2,24 +2,25 @@ package br.com.caelum.gerenciador.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.gerenciador.acao.IAcao;
 
-/**
- * Servlet implementation class UnicaEntradaServlet
- */
-public class UnicaEntradaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebFilter("/entrada")
+public class ControladorFilter implements Filter {
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		
 		String nome = null;
 		String paramAcao = request.getParameter("acao");
 		String nomeDaClasse = "br.com.caelum.gerenciador.acao." + paramAcao;
@@ -29,10 +30,13 @@ public class UnicaEntradaServlet extends HttpServlet {
 		 * genérico e deve seguir algumas convenções a fim de evitar alterar 
 		 * o servlet a cada nova ação criada.
 		 */
+		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+		HttpServletResponse httpServletReponse = (HttpServletResponse) response;
+		
 		try {
 			Class classe = Class.forName(nomeDaClasse);
 			IAcao acao = (IAcao) classe.newInstance();
-			nome = acao.executa(request, response);			
+			nome = acao.executa(httpServletRequest, httpServletReponse);			
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			throw new ServletException(e);
 		}
@@ -41,12 +45,11 @@ public class UnicaEntradaServlet extends HttpServlet {
 		
 		if (link[0].equalsIgnoreCase("forward")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/" + link[1]);
-			rd.forward(request, response);
+			rd.forward(request, httpServletReponse);
 		} else if (link[0].equalsIgnoreCase("redirect")) {
-			response.sendRedirect(link[1]);
+			httpServletReponse.sendRedirect(link[1]);
 		}
-		
-		
+
 	}
 
 }
