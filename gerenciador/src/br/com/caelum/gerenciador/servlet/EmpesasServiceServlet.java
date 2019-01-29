@@ -31,7 +31,20 @@ public class EmpesasServiceServlet extends HttpServlet {
 		
 		List<Empresa> empresas = banco.getEmpresas();
 		
-		String content = asXmlContent(empresas);
+		String content = null;
+		
+		String acceptParam = request.getHeader("Accept");
+		
+		if (acceptParam.endsWith("json")) {
+			content = asJsonContent(empresas);
+			response.setContentType("application/json");
+		} else if (acceptParam.endsWith("xml")) {
+			content = asXmlContent(empresas);
+			response.setContentType("application/xml");
+		} else {
+			content = "{\"message\":\"no content\"}";
+			response.setContentType("application/json");
+		}
 		
 		response.getWriter().append(content);
 	}
