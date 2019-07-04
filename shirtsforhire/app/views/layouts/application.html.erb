@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Shirtsforhire</title>
+    <title>Shirts For Hire</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <%= nav_bar brand: "Shirts For Hire" %>
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>
