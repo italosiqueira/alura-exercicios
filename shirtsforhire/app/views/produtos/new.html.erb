@@ -1,0 +1,30 @@
+
+<%= form_for Produto.new do |f| %>
+    <div class="form-group">
+        <!-- "nome" é tipo texto -->
+        <%= f.label :nome, "Nome" %>
+        <%= f.text_field :nome, class: "form-control"  %>
+    </div>
+
+    <div class="form-group">
+        <!-- "descrição" é tipo textarea -->
+        <%= f.label :descricao, "Descrição" %>
+        <%= f.text_area :descricao, class: "form-control" , rows: 4 %>
+    </div>
+    
+    <div class="form-group">
+        <!-- "quantidade" é tipo number -->
+        <%= f.label :quantidade, "Quantidade" %>
+        <%= f.number_field :quantidade, class: "form-control" , step: 1 %>
+        
+    </div>
+
+    <div class="form-group">
+        <!-- "preço" também e crescerá de 0.01 em 0.01 -->
+        <%= f.label :preco, "Preço" %>
+        <%= f.number_field :preco, class: "form-control" , step: 0.01 %>
+    </div>
+
+    <!-- botão para criar um novo produto -->
+    <%= f.submit "Criar" %>
+<% end %>
