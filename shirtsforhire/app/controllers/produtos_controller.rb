@@ -8,8 +8,9 @@ class ProdutosController < ApplicationController
         entrada = params.require(:produto).permit :nome, :descricao, :quantidade, :preco
         produto = Produto.new entrada
         produto.save
+        redirect_to root_url
     end
-
+    
     def destroy
         id = params[:id]
         Produto.destroy id
