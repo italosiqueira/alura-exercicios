@@ -5,5 +5,8 @@ class ProdutosController < ApplicationController
     end
 
     def create
+        entrada = params.require(:produto).permit :nome, :descricao, :quantidade, :preco
+        produto = Produto.new entrada
+        produto.save
     end
 end
