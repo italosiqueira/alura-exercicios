@@ -4,11 +4,18 @@ class ProdutosController < ApplicationController
         @produtos_por_preco = Produto.order(:preco).reverse_order.limit 2
     end
 
+    def new
+        @produto = Produto.new
+    end
+
     def create
         entrada = params.require(:produto).permit :nome, :descricao, :quantidade, :preco
-        produto = Produto.new entrada
-        produto.save
-        redirect_to root_url
+        @produto = Produto.new entrada
+        if @produto.save
+            redirect_to root_url
+        else
+            render :new
+        end
     end
     
     def destroy
