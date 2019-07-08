@@ -12,6 +12,7 @@ class ProdutosController < ApplicationController
         entrada = params.require(:produto).permit :nome, :descricao, :quantidade, :preco
         @produto = Produto.new entrada
         if @produto.save
+            flash[:notice] = "Novo produto cadastrado com sucesso!"
             redirect_to root_url
         else
             render :new

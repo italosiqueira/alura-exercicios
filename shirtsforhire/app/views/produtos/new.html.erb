@@ -1,5 +1,7 @@
-
-<%= form_for Produto.new do |f| %>
+<% @produto.errors.full_messages.each do |m| %>
+    <div class="alert alert-danger" role="alert"><%= m %></div>
+<% end %>
+<%= form_for @produto do |f| %>
     <div class="form-group">
         <!-- "nome" é tipo texto -->
         <%= f.label :nome, "Nome" %>
