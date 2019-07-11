@@ -3,21 +3,11 @@
         <tr>
             <th>Nome</th>
             <th>Descrição</th>
-            <th>Quantidade</th>
             <th>Preço</th>
             <th>Ação</th>
         </tr>
     </thead>
     <tbody>
-        <% @resultados.each do |p| %>
-            <tr>
-                <td><%= p.nome %></td>
-                <td><%= p.descricao %></td>
-                <td><%= p.quantidade %></td>
-                <td><%= p.preco %></td>
-
-                <td><%= button_to "Remover", p, method: :delete, class: "btn btn-danger", data: { confirm: "Tem certeza que deseja remover #{p.nome}?" }  %></td>
-            </tr>
-        <% end %>
+        <%= render partial: "produto" %>
     </tbody>
 </table>
