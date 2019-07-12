@@ -9,21 +9,21 @@
                 <th>Nome</th>
                 <th>Descrição</th>
                 <th>Preço</th>
-                <th>Ação</th>
+                <th colspan="2">Ações</th>
                 </tr>
                 </thead>
         <tbody>
-            <%= render @produtos_por_nome %>
+        <%= render @produtos_por_nome %>
         </tbody>
-    </table>
-    <table class="table table-bordered table-hover">
+        </table>
+        <table class="table table-bordered table-hover">
         <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Preço</th>
-                    <th>Ação</th>
-                </tr>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th colspan="2">Ações</th>
+        </tr>
         </thead>
         <tbody>
             <%= render @produtos_por_preco %>
