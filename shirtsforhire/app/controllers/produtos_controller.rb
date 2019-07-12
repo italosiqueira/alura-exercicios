@@ -6,10 +6,11 @@ class ProdutosController < ApplicationController
 
     def new
         @produto = Produto.new
+        @departamentos = Departamento.all
     end
 
     def create
-        entrada = params.require(:produto).permit :nome, :descricao, :quantidade, :preco
+        entrada = params.require(:produto).permit :nome, :descricao, :quantidade, :preco, :departamento_id
         @produto = Produto.new entrada
         if @produto.save
             flash[:notice] = "Novo produto cadastrado com sucesso!"
