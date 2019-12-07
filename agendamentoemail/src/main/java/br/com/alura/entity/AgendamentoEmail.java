@@ -16,6 +16,12 @@ public class AgendamentoEmail {
 	private String email;
 	
 	@Column
+	private String assunto;
+	
+	@Column
+	private String mensagem;
+	
+	@Column
 	private Boolean enviado;
 
 	public Integer getId() {
@@ -34,6 +40,22 @@ public class AgendamentoEmail {
 		this.email = email;
 	}
 
+	public String getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+
 	public Boolean getEnviado() {
 		return enviado;
 	}
@@ -46,8 +68,6 @@ public class AgendamentoEmail {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((enviado == null) ? 0 : enviado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -61,16 +81,6 @@ public class AgendamentoEmail {
 		if (getClass() != obj.getClass())
 			return false;
 		AgendamentoEmail other = (AgendamentoEmail) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (enviado == null) {
-			if (other.enviado != null)
-				return false;
-		} else if (!enviado.equals(other.enviado))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,5 +88,6 @@ public class AgendamentoEmail {
 			return false;
 		return true;
 	}
+	
 	
 }
