@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 import br.com.alura.dto.MensagemErroDto;
 
@@ -12,6 +13,7 @@ import br.com.alura.dto.MensagemErroDto;
  * Esta classe é responsável por mapear as exceções de um tipo que ocorrerem em novos objetos, 
  * a critério do desenvolvedor, para outros módulos ou camadas.
  */
+@Provider
 public class ConstraintValidationMapper implements ExceptionMapper<ConstraintViolationException>{
 
 	@Override
