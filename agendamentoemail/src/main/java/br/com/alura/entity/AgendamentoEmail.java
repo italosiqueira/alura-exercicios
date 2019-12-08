@@ -15,20 +15,19 @@ public class AgendamentoEmail {
 	private Integer id;
 	
 	@Column
-	@NotBlank
-	@Email
+	@NotBlank(message="{agendamentoEmail.email.vazio}")
+	@Email(message="{agendamentoEmail.email.invalido}")
 	private String email;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message="{agendamentoEmail.assunto.vazio}")
 	private String assunto;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message="{agendamentoEmail.mensagem.vazio}")
 	private String mensagem;
 	
 	@Column
-	@NotBlank
 	private Boolean enviado;
 
 	public Integer getId() {
