@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import br.com.alura.dao.AgendamentoEmailDao;
 import br.com.alura.entity.AgendamentoEmail;
+import br.com.alura.exception.BusinessException;
 import br.com.alura.interceptor.Logger;
 
 @Stateless
@@ -21,9 +22,14 @@ public class AgendamentoEmailBusiness {
 		return agendamentoEmailDao.listarAgendamentosEmail();
 	}
 	
-	public void salvarAgendamentoEmail(@Valid AgendamentoEmail agendamentoEmail) {
-		agendamentoEmail.setEnviado(false);
-		agendamentoEmailDao.salvarAgendamento(agendamentoEmail);
+	public void salvarAgendamentoEmail(@Valid AgendamentoEmail agendamentoEmail) throws BusinessException {
+		
+		if (agendamentoEmailDao.listarAgendamentoEmailPorEmail(agendamentoEmail.getEmail()).isEmpty()) {			
+			agendamentoEmail.setEnviado(false);
+			agendamentoEmailDao.salvarAgendamento(agendamentoEmail);
+		} else {
+			throw new BusinessException("E-Mail ainda possui agendamento pendente para envio!");
+		}
 	}
 
 }
