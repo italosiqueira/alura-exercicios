@@ -22,6 +22,10 @@ public class AgendamentoEmailBusiness {
 		return agendamentoEmailDao.listarAgendamentosEmail();
 	}
 	
+	public List<AgendamentoEmail> listarAgendamentosEmailNaoEnviados() {
+		return agendamentoEmailDao.listarAgendamentosEmailNaoEnviados();
+	}
+	
 	public void salvarAgendamentoEmail(@Valid AgendamentoEmail agendamentoEmail) throws BusinessException {
 		
 		if (agendamentoEmailDao.listarAgendamentoEmailPorEmail(agendamentoEmail.getEmail()).isEmpty()) {			
