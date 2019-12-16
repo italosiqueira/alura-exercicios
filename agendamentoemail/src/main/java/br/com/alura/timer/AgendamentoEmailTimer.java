@@ -1,7 +1,6 @@
 package br.com.alura.timer;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
@@ -13,8 +12,6 @@ import br.com.alura.entity.AgendamentoEmail;
 @Singleton
 public class AgendamentoEmailTimer {
 	
-	private Logger logger = Logger.getLogger(AgendamentoEmailTimer.class.getName());
-	
 	@Inject
 	private AgendamentoEmailBusiness business;
 	
@@ -22,10 +19,11 @@ public class AgendamentoEmailTimer {
 	public void enviarEmailsAgendados() {
 		
 		List<AgendamentoEmail> emailNaoEnviados = this.business.listarAgendamentosEmailNaoEnviados();
+		
 		emailNaoEnviados
 			.stream()
 			.forEach(
-					agendamentoEmail -> this.logger.info("Enviou para " + agendamentoEmail.getEmail()));			
+					agendamentoEmail -> this.business.enviarEmail(agendamentoEmail));			
 	}
 
 }
