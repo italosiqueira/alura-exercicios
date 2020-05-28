@@ -1,0 +1,49 @@
+1. Conectar ao CLI do JBoss (JBoss deve estar sendo executado)
+
+jboss-cli.bat --connect
+
+2. Configurar uma fila JMS no Wildfly:
+
+jms-queue add --queue-address=EmailQueue --entries=java:/jms/queue/EmailQueue
+
+3. Verificando o conteúdo das filas do Wildfly:
+
+a) Fila de mensagens:
+
+/subsystem=messaging-activemq/server=default/jms-queue=EmailQueue:list-messages
+
+b) Fila de mensagens rejeitadas:
+
+/subsystem=messaging-activemq/server=default/jms-queue=DLQ:list-messages
+
+CÓDIGO-FONTE
+
+1. Especifica o produtor (responsável por colocar elementos na fila):
+
+@Inject
+@JMSConnectionFactory("java:jboss/DefaultJMSConnectionFactory")
+private JMSContext context;
+
+2. Especifica a fila em si (quem recebe os elementos):
+
+@Resource(mappedName = "java:/jms/queue/EmailQueue")
+private Queue queue;
+
+Classe especializada EJB para consumir filas: Message Driven Bean (MDB).
+
+3. Para consumir a fila com um bean MDB:
+
+@Logger
+@MessageDriven(activationConfig = {
+        @ActivationConfigProperty(propertyName = "destinationLookup",
+                propertyValue = "java:/jms/queue/EmailQueue"),
+        @ActivationConfigProperty(propertyName = "destinationType",
+                propertyValue = "javax.jms.Queue")
+})
+public class EmailMDB implements MessageListener {
+    @Inject
+    private AgendamentoEmailBusiness agendamentoEmailBusiness;
+    @Override
+    public void onMessage(javax.jms.Message message) {
+    }
+}
