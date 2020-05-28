@@ -68,5 +68,10 @@ public class AgendamentoEmailBusiness {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public void marcarEnviada(AgendamentoEmail agendamentoEmail) {
+		agendamentoEmail.setEnviado(true);
+		agendamentoEmailDao.atualizarAgendamentoEmail(agendamentoEmail);
+	}
 
 }

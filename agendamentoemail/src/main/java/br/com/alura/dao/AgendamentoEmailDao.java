@@ -36,6 +36,10 @@ public class AgendamentoEmailDao {
 
 		return agendamentoEmail;
 	}
+	
+	public void atualizarAgendamentoEmail(AgendamentoEmail agendamentoEmail) {
+		em.merge(agendamentoEmail);
+	}
 
 	public void salvarAgendamento(AgendamentoEmail agendamentoEmail) {
 		em.persist(agendamentoEmail);
