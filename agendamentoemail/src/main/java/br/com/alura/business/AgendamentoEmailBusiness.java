@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -41,7 +43,8 @@ public class AgendamentoEmailBusiness {
 	public List<AgendamentoEmail> listarAgendamentosEmailNaoEnviados() {
 		return agendamentoEmailDao.listarAgendamentosEmailNaoEnviados();
 	}
-
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void salvarAgendamentoEmail(@Valid AgendamentoEmail agendamentoEmail) throws BusinessException {
 
 		if (agendamentoEmailDao.listarAgendamentoEmailPorEmail(agendamentoEmail.getEmail()).isEmpty()) {
