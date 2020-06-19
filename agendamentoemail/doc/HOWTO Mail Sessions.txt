@@ -1,0 +1,15 @@
+1. Conectar ao CLI do JBoss (JBoss deve estar sendo executado)
+
+jboss-cli.bat --connect
+
+2. Configurar um Session para envio de e-mails no Wildfly:
+
+/subsystem=mail/mail-session=agendamentoMailSession:add(jndi-name=java:jboss/mail/AgendamentoMailSession)
+
+3. Em seguida, habilitar a comunicação do servidor Wildfly com uma máquina remota, especificamente o serviço de caixa de mensagens Mailtrap:
+
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=my-smtp-binding:add(host=smtp.mailtrap.io, port=2525)
+
+4. Por fim, configurando o Session de E-Mail para utilizar o socket, indicando o usuário e senha (do Mailtrap):
+
+/subsystem=mail/mail-session=agendamentoMailSession/server=smtp:add(outbound-socket-binding-ref= my-smtp-binding, username=bc82647d48b758, password=6320632ea13bd1, tls=true)

@@ -1,0 +1,15 @@
+1. Conectar ao CLI do JBoss (JBoss deve estar sendo executado)
+
+jboss-cli.bat --connect
+
+2. Instalar o módulo no Wildfly
+
+module add --name=com.microsoft.sqlserver --resources=C:\Program Files\Microsoft JDBC DRIVER 7.4 para SQL Server\mssql-jdbc-7.4.1.jre8.jar --dependencies=javax.api,javax.transaction.api
+
+3. Definir o módulo como um driver JDBC
+
+/subsystem=datasources/jdbc-driver=sqlserver:add(driver-name=sqlserver,driver-module-name=com.microsoft.sqlserver,driver-xa-datasource-class-name=com.microsoft.sqlserver.jdbc.SQLServerXADataSource)
+
+4. Adicionar o DataSource
+
+data-source add --name=AgendamentoDS --jndi-name=java:jboss/datasources/AgendamentoDS --driver-name=sqlserver  --connection-url=jdbc:sqlserver://localhost:1433;DatabaseName=agendamentobd --user-name=usuario --password=cde34rfv --min-pool-size=10 --max-pool-size=20
