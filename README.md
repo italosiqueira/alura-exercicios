@@ -10,3 +10,4 @@ Segue a relação de projetos e seus cursos relacionados:
 * *aluraframe*: da série de cursos JavaScript avançado, começando com [JavaScript avançado 1](https://cursos.alura.com.br/course/javascript-es6-orientacao-a-objetos-parte-1);
 * *gerenciador*: [Servlet Parte 1: Fundamentos da programação web Java](https://cursos.alura.com.br/course/servlets-fundamentos-programacao-web-java/);
 * *shirtsforhire*: [Ruby on Rails 4: do zero à web](https://cursos.alura.com.br/course/ruby-on-rails-4-do-zero).
+* *agendamentoemail*: [EJB com Java EE 8: API Rest com WildFly 15](https://cursos.alura.com.br/course/java-ee-8-e-ejb-3)
