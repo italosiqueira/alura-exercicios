@@ -62,7 +62,7 @@ GEM
       rake (< 13.0)
     commonjs (0.2.7)
     concurrent-ruby (1.1.5)
-    crass (1.0.4)
+    crass (1.0.6)
     erubi (1.8.0)
     execjs (2.7.0)
     globalid (0.4.2)
@@ -76,7 +76,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-    loofah (2.2.3)
+    loofah (2.16.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
