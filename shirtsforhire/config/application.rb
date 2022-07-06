@@ -12,6 +12,9 @@ module Shirtsforhire
     config.load_defaults 5.2
 
     config.i18n.default_locale = "pt-BR"
+    
+    # Overides Action View HTML Sanitizer to prevente Cross-site Scripting
+    config.action_view.sanitized_allowed_tags = ["select", "style"]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
